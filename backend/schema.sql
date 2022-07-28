@@ -1,0 +1,63 @@
+CREATE TABLE "Products"(
+    "product_id" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "slogan" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
+    "default_price" TEXT NOT NULL
+);
+ALTER TABLE
+    "Products" ADD PRIMARY KEY("product_id");
+CREATE TABLE "Features"(
+    "feature_id" INTEGER NOT NULL,
+    "product_id" INTEGER NOT NULL,
+    "feature" TEXT NOT NULL,
+    "value" TEXT NULL
+);
+ALTER TABLE
+    "Features" ADD PRIMARY KEY("feature_id");
+CREATE TABLE "Styles"(
+    "style_id" INTEGER NOT NULL,
+    "product_id" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "sale_price" INTEGER NULL,
+    "original_price" INTEGER NOT NULL,
+    "default" BOOLEAN NOT NULL
+);
+ALTER TABLE
+    "Styles" ADD PRIMARY KEY("style_id");
+CREATE TABLE "SKUs"(
+    "sku_id" INTEGER NOT NULL,
+    "style_id" INTEGER NOT NULL,
+    "size" TEXT NOT NULL,
+    "quantity" INTEGER NOT NULL
+);
+ALTER TABLE
+    "SKUs" ADD PRIMARY KEY("sku_id");
+CREATE TABLE "Photos"(
+    "photo_id" INTEGER NOT NULL,
+    "style_id" INTEGER NOT NULL,
+    "url" TEXT NOT NULL,
+    "thumbnail_url" TEXT NOT NULL
+);
+ALTER TABLE
+    "Photos" ADD PRIMARY KEY("photo_id");
+CREATE TABLE "Related Products"(
+    "relationship_id" INTEGER NOT NULL,
+    "product_id" INTEGER NOT NULL,
+    "related_id" INTEGER NOT NULL
+);
+ALTER TABLE
+    "Related Products" ADD PRIMARY KEY("relationship_id");
+ALTER TABLE
+    "Features" ADD CONSTRAINT "features_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "Products"("product_id");
+ALTER TABLE
+    "Styles" ADD CONSTRAINT "styles_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "Products"("product_id");
+ALTER TABLE
+    "SKUs" ADD CONSTRAINT "skus_style_id_foreign" FOREIGN KEY("style_id") REFERENCES "Styles"("style_id");
+ALTER TABLE
+    "Photos" ADD CONSTRAINT "photos_style_id_foreign" FOREIGN KEY("style_id") REFERENCES "Styles"("style_id");
+ALTER TABLE
+    "Related Products" ADD CONSTRAINT "related products_product_id_foreign" FOREIGN KEY("product_id") REFERENCES "Products"("product_id");
+ALTER TABLE
+    "Related Products" ADD CONSTRAINT "related products_related_id_foreign" FOREIGN KEY("related_id") REFERENCES "Products"("product_id");
