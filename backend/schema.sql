@@ -6,6 +6,8 @@ CREATE TABLE "Products"(
     "category" TEXT NOT NULL,
     "default_price" TEXT NOT NULL
 );
+CREATE INDEX "products_product_id_index" ON
+    "Products"("product_id");
 ALTER TABLE
     "Products" ADD PRIMARY KEY("product_id");
 CREATE TABLE "Features"(
@@ -14,16 +16,20 @@ CREATE TABLE "Features"(
     "feature" TEXT NOT NULL,
     "value" TEXT NULL
 );
+CREATE INDEX "features_product_id_index" ON
+    "Features"("product_id");
 ALTER TABLE
     "Features" ADD PRIMARY KEY("feature_id");
 CREATE TABLE "Styles"(
     "style_id" INTEGER NOT NULL,
     "product_id" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
-    "sale_price" INTEGER NULL,
-    "original_price" INTEGER NOT NULL,
+    "sale_price" TEXT NULL,
+    "original_price" TEXT NOT NULL,
     "default" BOOLEAN NOT NULL
 );
+CREATE INDEX "styles_product_id_index" ON
+    "Styles"("product_id");
 ALTER TABLE
     "Styles" ADD PRIMARY KEY("style_id");
 CREATE TABLE "SKUs"(
@@ -32,6 +38,8 @@ CREATE TABLE "SKUs"(
     "size" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL
 );
+CREATE INDEX "skus_style_id_index" ON
+    "SKUs"("style_id");
 ALTER TABLE
     "SKUs" ADD PRIMARY KEY("sku_id");
 CREATE TABLE "Photos"(
@@ -40,6 +48,8 @@ CREATE TABLE "Photos"(
     "url" TEXT NOT NULL,
     "thumbnail_url" TEXT NOT NULL
 );
+CREATE INDEX "photos_style_id_index" ON
+    "Photos"("style_id");
 ALTER TABLE
     "Photos" ADD PRIMARY KEY("photo_id");
 CREATE TABLE "Related Products"(
@@ -47,6 +57,8 @@ CREATE TABLE "Related Products"(
     "product_id" INTEGER NOT NULL,
     "related_id" INTEGER NOT NULL
 );
+CREATE INDEX "related products_product_id_index" ON
+    "Related Products"("product_id");
 ALTER TABLE
     "Related Products" ADD PRIMARY KEY("relationship_id");
 ALTER TABLE
