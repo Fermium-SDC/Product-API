@@ -28,8 +28,20 @@ export default async function getProductStyles(req, res) {
               FROM "Photos" ph
               WHERE style_id = s.style_id
             ) AS photos
-          ) AS "photos"
-		FROM "Styles" s
+          ) AS "photos",
+          (SELECT json_object_agg(sk.sku_id,
+            (
+              SELECT json_build_object(
+                'quantity', sk.quantity,
+                'size', sk.size)
+              FROM "SKUs"
+              WHERE sku_id = sk.sku_id
+            )
+          )
+           FROM "SKUs" sk
+           WHERE style_id = s.style_id
+        ) AS "skus"
+        FROM "Styles" s
         WHERE s.product_id = ${product_id}
         ) AS styles
       ) AS "results"
