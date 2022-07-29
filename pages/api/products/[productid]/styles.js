@@ -18,8 +18,18 @@ export default async function getProductStyles(req, res) {
           s.name,
           s.original_price,
           s.sale_price,
-          s.default AS "default?"
-        FROM "Styles" s
+          s.default AS "default?",
+          (
+            SELECT json_agg(photos)
+            FROM (
+              SELECT
+                ph.thumbnail_url,
+                ph.url
+              FROM "Photos" ph
+              WHERE style_id = s.style_id
+            ) AS photos
+          ) AS "photos"
+		FROM "Styles" s
         WHERE s.product_id = ${product_id}
         ) AS styles
       ) AS "results"
