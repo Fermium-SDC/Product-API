@@ -10,7 +10,12 @@ export default async function getProducts(req, res) {
   try {
     const products = await sql`
       SELECT
-      *
+      product_id AS "id",
+      name,
+      slogan,
+      description,
+      category,
+      default_price
       FROM "Products"
       ORDER BY product_id ASC LIMIT ${perPage}
       OFFSET ${pageNum * perPage - perPage}
