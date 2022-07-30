@@ -8,8 +8,6 @@ export default async function getProductStyles(req, res) {
   const product_id = req.query.productid;
   try {
     const styles = await sql`
-        SELECT json_agg(styles)
-        FROM (
         SELECT
           s.style_id,
           s.name,
@@ -40,14 +38,13 @@ export default async function getProductStyles(req, res) {
         ) AS "skus"
         FROM "Styles" s
         WHERE s.product_id = ${product_id}
-        ) AS styles
     `;
 
     //if (styles[0].json_build_object.results === null) {
     //  styles[0].json_build_object.results = [];
     //}
 
-    res.json({ product_id: product_id, results: styles[0].json_agg });
+    res.json({ product_id: product_id, results: styles });
   } catch (error) {
     res.status(500).send("Error fetching data ", error);
   }

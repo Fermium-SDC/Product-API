@@ -22,7 +22,7 @@ export default async function getProductById(req, res) {
           f.feature,
           f.value
           FROM "Features" f
-          WHERE f.product_id = ${product_id}
+          WHERE product_id = p.product_id
         ) AS features
       ) AS "features"
     FROM "Products" p
