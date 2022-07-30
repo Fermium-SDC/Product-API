@@ -9,28 +9,26 @@ export default async function getProductById(req, res) {
   try {
     const products = await sql`
     SELECT
-    json_build_object(
-      'id', p.product_id,
-      'name', p.name,
-      'slogan', p.slogan,
-      'description', p.description,
-      'category', p.category,
-      'default_price', p.default_price,
-      'features', (
+      p.product_id AS "id",
+      p.name,
+      p.slogan,
+      p.description,
+      p.category,
+      p.default_price,
+      (
         SELECT json_agg(features)
         FROM (
           SELECT
           f.feature,
           f.value
           FROM "Features" f
-          WHERE f.product_id = ${product_id}
+          WHERE product_id = p.product_id
         ) AS features
-      )
-    )
+      ) AS "features"
     FROM "Products" p
-    WHERE p.product_id = ${product_id};
+    WHERE p.product_id = ${product_id}
   `;
-    res.json(products[0].json_build_object);
+    res.json(products[0]);
   } catch (error) {
     res.status(500).send("Error fetching data ", error);
   }
