@@ -59,6 +59,12 @@ CREATE TABLE "Related Products"(
 );
 CREATE INDEX "related products_product_id_index" ON
     "Related Products"("product_id");
+CREATE TABLE "Cart"(
+    "sku_id" INTEGER NOT NULL,
+    "count" INTEGER NOT NULL
+);
+ALTER TABLE
+    "Cart" ADD PRIMARY KEY("sku_id");
 ALTER TABLE
     "Related Products" ADD PRIMARY KEY("relationship_id");
 ALTER TABLE

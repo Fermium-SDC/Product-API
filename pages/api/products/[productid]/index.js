@@ -1,6 +1,10 @@
 import sql from "../../../../backend/db";
 
 export default async function getProductById(req, res) {
+  if (req.method === "OPTIONS") {
+    res.status(200).send("ok")
+    return;
+  }
   if (req.method !== "GET") {
     res.status(500).send("GET requests only");
     return;
