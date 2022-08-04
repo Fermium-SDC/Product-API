@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  experimental: { images: { allowFutureImage: true } },
+  images: { domains: ["avatars.githubusercontent.com"]},
   async headers() {
     return [
     {
