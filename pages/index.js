@@ -55,6 +55,7 @@ export default function Home({ userData }) {
               return (
                 <a style={anchorStyle} href={user.html_url} key={user.id}>
                   <Image
+                    style={{borderRadius: '10%'}}
                     src={user.avatar_url}
                     alt="github-avatar"
                     width={100}
