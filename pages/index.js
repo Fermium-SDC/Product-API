@@ -44,20 +44,17 @@ export default function Home({ userData }) {
           .main {
             text-align: center;
             background-color: white;
-            padding: 0px 10px;
+            padding: 0px 15px;
           }
           .user-card {
             background-color: whitesmoke;
-            padding: 10px 10px 0px 10px;
+            padding-top: 15px;
             box-shadow: 1px 1px 10px 1px black;
             border-radius: 10%;
           }
           .card-container {
             display: flex;
-            justify-content: center;
             gap: 2%;
-            text-align: center;
-            border-radius: 10%;
           }
         `}</style>
         <h1>Welcome to Fermium&apos;s Product API</h1>
