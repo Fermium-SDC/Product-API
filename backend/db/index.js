@@ -1,12 +1,11 @@
 import postgres from 'postgres'
-import { myPass, myDomain } from './dbpass'
 
 const sql = postgres({
-  host: myDomain,
-  port: 5432,
-  database: 'test',
-  username: 'patman817',
-  password: myPass
+  host: process.env.DB_DOMAIN,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
 })
 
 export default sql
